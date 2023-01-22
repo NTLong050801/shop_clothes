@@ -30,4 +30,22 @@ class CategoryService
         }
         return true;
     }
+    public function findItem($request){
+
+            return Categories::where('id',$request->id)->get();
+
+    }
+    public function update ($request , $id){
+        try {
+            $cate = Categories::where('id',$id)->get()[0];
+            $cate->fill($request->input());
+            $cate->save();
+            $cate->updated_at = now();
+            Session::flash('success', 'Sửa danh mục thành công');
+            return true;
+        }catch (\Exception $err){
+            Session::flash('success','Sửa thất bại');
+        }
+        return false;
+    }
 }

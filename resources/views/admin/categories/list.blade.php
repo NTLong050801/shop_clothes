@@ -28,9 +28,40 @@
                 </div>
                 @csrf
             </form>
-
         </div>
     </div>
+{{--   form_update--}}
+        <div class="modal fade" id="editLoaiHang" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <form id="form_edit" action="" method="POST">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Sửa tên loại hàng</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <input type="text" id="name_edit" name="name_cate" value="" class="form-control" placeholder="Tên Loại hàng">
+                            @error('name_cate')
+                            <div class="mt-2">
+                                <span class="text-danger mt-5">{{ $message }}</span>
+                            </div>
+                            @enderror
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                            <button type="submit" class="btn btn-primary" >Update</button>
+                        </div>
+                    </div>
+                    @csrf
+                </form>
+
+            </div>
+        </div>
+
+
+
     @if(!$datas->isEmpty())
         <table class="table table-striped mt-3">
             <thead>
@@ -43,27 +74,9 @@
             </tr>
             </thead>
             <tbody>
-{{--            @foreach($datas as $data)--}}
-{{--                <tr>--}}
-{{--                    <th scope="row">1</th>--}}
-{{--                    <td>{{$data->name_cate}}</td>--}}
-{{--                    <td>{{$data->updated_at-> format('H:i:s d-m-Y')}}</td>--}}
-{{--                    <td class="text-center w-10">--}}
-{{--                        <a href="{{route('edit',$data->id)}}">--}}
-{{--                            <button class="btn btn-sm btn-warning "><i class="fa-solid fa-pen-to-square"></i></button>--}}
-{{--                        </a>--}}
-{{--                        <a href="{{route('destroy',$data->id)}}">--}}
-{{--                            <button class="btn btn-sm btn-danger "><i class="fa-solid fa-trash"></i></button>--}}
-{{--                        </a>--}}
-
-{{--                    </td>--}}
-
-{{--                </tr>--}}
-
-{{--            @endforeach--}}
-
 
             {!!   \App\Helpers\Helper::listCate($datas)!!}
+            </tbody>
         </table>
 
 

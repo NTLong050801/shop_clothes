@@ -81,9 +81,12 @@ class CategoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request)
     {
-        //
+
+//        $title = "Loại hàng";
+//        $datas = $this->cateService->getAll([],$this->rcOfPage);
+//        return view('admin.categories.list',compact('title','datas','data_item'));
     }
 
     /**
@@ -95,7 +98,17 @@ class CategoriesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'name_cate' => 'required|min:4|unique:categories',
+        ],[
+            'required' => 'Vui lòng nhập tên loại hàng',
+            'min' => 'Tên loại hàng ít nhất là :min ký tự',
+            'unique' => 'Tên loại hàng đã tồn tại'
+        ]);
+        $this->cateService->update ($request , $id);
+
+
+        return redirect()->route('admin.cate.index');
     }
 
     /**

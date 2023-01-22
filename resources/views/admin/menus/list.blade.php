@@ -94,6 +94,7 @@
                         </a>
                         <a href="{{route('destroy',$data->id)}}">
                             <button class="btn btn-sm btn-danger "><i class="fa-solid fa-trash"></i></button>
+                            <i class="fa-regular fa-eye"></i>
                         </a>
 
                     </td>

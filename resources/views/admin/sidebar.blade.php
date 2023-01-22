@@ -12,13 +12,13 @@
             </a>
             <ul class="nav nav-treeview" style="display: block;">
                 <li class="nav-item">
-                    <a href="{{route('admin.menus.index')}}" class="nav-link">
+                    <a href="{{route('admin.product.create')}}" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Thêm sản phẩm</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('admin.menus.getAll')}}" class="nav-link">
+                    <a href="{{route('admin.product.index')}}" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Danh sách Sản phẩm</p>
                     </a>

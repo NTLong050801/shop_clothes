@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\ProductController;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\Admin\Users\LoginController;
 use App\Http\Controllers\Admin\MainController;
@@ -7,7 +8,8 @@ use \App\Http\Controllers\Admin\MenuController;
 use \App\Http\Controllers\Admin\Users\UsersController;
 use \App\Http\Controllers\Admin\UploadController;
 use \App\Http\Controllers\Admin\CategoriesController;
-Route::get('/',[LoginController::class,'index']);
+use \App\Http\Controllers\FrontEnd\HomeController;
+Route::get('/',[HomeController::class,'index']);
 Route::get('admin/users/login',[LoginController::class,'index'])->name('login');
 Route::get('admin/users/logout',[LoginController::class,'logout'])->name('logout');
 Route::post('admin/users/login/store',[LoginController::class,'store'])-> name('store_login');
@@ -38,7 +40,20 @@ Route::middleware(['auth'])->group(function () {
             Route::get('create',[CategoriesController::class,'create'])->name('admin.cate.create');
             Route::post('store',[CategoriesController::class,'store'])->name('admin.cate.store');
             Route::get('{id}/edit',[CategoriesController::class,'edit'])->name('admin.cate.edit');
+            Route::post('{id}/update',[CategoriesController::class,'update'])->name('admin.cate.update');
+
             Route::get('{id}/delete',[CategoriesController::class,'destroy'])->name('admin.cate.destroy');
+        });
+
+        Route::prefix('product')->group(function (){
+            Route::get('index',[ProductController::class,'index'])->name('admin.product.index');
+            Route::get('create',[ProductController::class,'create'])->name('admin.product.create');
+            Route::post('store',[ProductController::class,'store'])->name('admin.product.store');
+            Route::get('{id}/edit',[ProductController::class,'edit'])->name('admin.product.edit');
+            Route::post('{id}/update',[ProductController::class,'update'])->name('admin.product.update');
+
+            Route::get('{id}/delete',[ProductController::class,'destroy'])->name('admin.product.destroy');
+            Route::get('{id}/show',[ProductController::class,'show'])->name('admin.product.show');
         });
 
         #upload admin
