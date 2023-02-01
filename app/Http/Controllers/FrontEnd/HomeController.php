@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Services\Menu\CategoryService;
 use App\Http\Services\Menu\ProductService;
 use App\Models\Categories;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -26,9 +27,12 @@ class HomeController extends Controller
     {
         //
         $title = "Shop Quần áo";
-        $categories =  $this->categoryService->getAll([],10000);
-        $products = $this->productSerive->getAll([]);
-        return view('frontend.main',compact('title','categories','products'));
+        $categories =  Categories::all();
+        $products = Product::all();
+        $products_new = Product::orderBy('id','desc')->limit(3)->get();
+        $products_price = Product::orderBy('price_out','asc')->limit(3)->get();
+        $products_good = Product::orderBy('id','asc')->limit(3)->get();
+        return view('frontend.main',compact('title','categories','products','products_new','products_price','products_good'));
     }
 
     /**

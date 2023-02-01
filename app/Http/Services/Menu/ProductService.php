@@ -4,19 +4,19 @@ namespace App\Http\Services\Menu;
 
 use App\Models\Product;
 use Illuminate\Support\Facades\Session;
+use Str;
 
 class ProductService
 {
-    public function getAll($page){
-//         Product::paginate(10);
-     //   return Product::join('categories','product.id_category','=','categories.id')->get();
-        if(empty($page)){
-            return Product::with('categories')->orderBy('id','desc')->get();
-        }
+    public function getAll(){
+
         return Product::with('categories')->orderBy('id','desc')->paginate('10');
     }
     public function store($request){
-       return Product::create([
+
+       return Product::firstOrCreate([
+           'slug' => Str::slug($request->input('name'), '-')
+       ],[
             'name' => $request->input('name'),
             'price_in' => $request->input('price_in'),
             'price_out' => $request->input('price_out'),
@@ -37,7 +37,7 @@ class ProductService
        return  false;
 
     }
-    public function findProduct($id){
-        return Product::with('categories')->where('id',$id)->get();
+    public function show($id){
+        return Product::with('categories')->where('id',$id)->first();
     }
 }

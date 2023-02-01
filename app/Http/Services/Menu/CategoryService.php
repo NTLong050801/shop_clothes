@@ -7,9 +7,9 @@ use Illuminate\Support\Facades\Session;
 
 class CategoryService
 {
-    public function getAll($filters = [], $rcOfPage)
+    public function getAll($filters = [], $rcOfPage) //getProducts
     {
-        //dd($filters);
+
         if(!empty($filters)){
             return Categories::orderByDesc('id')->where($filters)->paginate($rcOfPage)->withQueryString();
 

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\FrontEnd\DetailProductContrller;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\Admin\Users\LoginController;
 use App\Http\Controllers\Admin\MainController;
@@ -9,10 +10,14 @@ use \App\Http\Controllers\Admin\Users\UsersController;
 use \App\Http\Controllers\Admin\UploadController;
 use \App\Http\Controllers\Admin\CategoriesController;
 use \App\Http\Controllers\FrontEnd\HomeController;
-Route::get('/',[HomeController::class,'index']);
+Route::get('/',[HomeController::class,'index'])->name('index');
+
+Route::get('/{id}/{id_cate}/product',[DetailProductContrller::class,'index'])->name('detail');
 Route::get('admin/users/login',[LoginController::class,'index'])->name('login');
 Route::get('admin/users/logout',[LoginController::class,'logout'])->name('logout');
 Route::post('admin/users/login/store',[LoginController::class,'store'])-> name('store_login');
+
+
 Route::middleware(['auth'])->group(function () {
     Route::prefix('admin')->group(function (){
         Route::get('/',[MainController::class,'index'])->middleware('auth')->name('admin');
